@@ -1,0 +1,17 @@
+{:env-config
+ {:onyx/tenancy-id       "dev"
+  :zookeeper/address     "127.0.0.1:2181"
+  :zookeeper/server?     true
+  :zookeeper.server/port 2181}
+
+ :peer-config
+ {:onyx/tenancy-id                                "dev"
+  :zookeeper/address                              "127.0.0.1:2181"
+  :onyx.peer/job-scheduler                        :onyx.job-scheduler/balanced
+  :onyx.peer/zookeeper-timeout                    60000
+  :onyx.peer/storage.zk.insanely-allow-windowing? true
+  :onyx.messaging/allow-short-circuit?            false
+  :onyx.messaging/impl                            :aeron
+  :onyx.messaging/bind-addr                       "localhost"
+  :onyx.messaging/peer-port                       40200
+  :onyx.messaging.aeron/embedded-driver?          true}}
