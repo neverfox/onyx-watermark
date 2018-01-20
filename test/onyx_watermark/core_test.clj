@@ -50,17 +50,8 @@
    ["d2c600c2-0656-53fb-a185-fa2040f2a019"
     {:ts "20180119T045248.475Z"}]])
 
-(defn throttle [f time]
-  (let [c (a/chan 100)]
-    (a/go-loop []
-      (when-let [v (a/<! c)]
-        (f v)
-        (a/<! (a/timeout time))
-        (recur)))
-    (fn [coll]
-      (a/onto-chan c coll))))
-
-;; To better simulate a real job, make messages arrive over some time
+;; To better simulate a real job and get some clear separation of logs,
+;; make messages arrive over some time
 (defn write-traffic! [brokers topic traffic-sequence]
   (let [p (g/producer brokers)
         c (a/chan 100)]
